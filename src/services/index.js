@@ -1,10 +1,10 @@
 import models from '../models';
 import UserServices from './user';
-import EntityServices from './entity';
+import ImageServices from './image';
 
 const user = new UserServices(models);
-const entity = new EntityServices(models);
+const image = new ImageServices(models);
 
 export default {
-  user, entity,
+  user, image,
 };

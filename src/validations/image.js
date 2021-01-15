@@ -1,0 +1,29 @@
+export default class EntitySchema {
+  constructor(checkSchema) {
+    this.validateInput = checkSchema({
+      description: {
+        in: ['body'],
+        isLength: {
+          errorMessage: 'image description should be at least 1 character long',
+          options: { min: 1 },
+        },
+        isString: {
+          errorMessage: 'Image description must be string data type',
+        },
+        exists: {
+          errorMessage: 'Image description is required',
+          options: { checkFalsy: true },
+        },
+      },
+    });
+
+    this.validateEntryId = checkSchema({
+      id: {
+        in: ['query'],
+        isMongoId: {
+          errorMessage: 'Entity id does not match MongoId format',
+        },
+      },
+    });
+  }
+}

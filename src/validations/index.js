@@ -1,7 +1,7 @@
 import { validationResult, checkSchema } from 'express-validator';
 
 import UserSchema from './user';
-import EntitySchema from './entity';
+import ImageSchema from './image';
 import fileUpload from '../utils/fileUpload';
 
 const handleValidationErr = (req, res, next) => {
@@ -16,7 +16,7 @@ const handleFileUploadErr = ({ file }, res, next) => {
 };
 
 const userSchema = new UserSchema(checkSchema);
-const entitySchema = new EntitySchema(checkSchema);
+const imageSchema = new ImageSchema(checkSchema);
 
 export default {
   user: {
@@ -24,8 +24,8 @@ export default {
     login: [userSchema.validateLogin, handleValidationErr],
     jwt: [userSchema.validateJWT, handleValidationErr],
   },
-  entity: {
-    create: [entitySchema.validateInput, handleValidationErr],
-    id: [entitySchema.validateEntryId, handleValidationErr],
+  image: {
+    create: [fileUpload.image.single('picture'), handleFileUploadErr, imageSchema.validateInput, handleValidationErr],
+    id: [imageSchema.validateEntryId, handleValidationErr],
   },
 };
