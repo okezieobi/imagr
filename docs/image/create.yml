@@ -24,10 +24,11 @@ components:        # Schema definition for request body
   Create:
     type: object
     properties:
-          title:
+          description:
             type: string
-          body:
+          picture:
             type: string
+            format: binary
     required:
-      - title
-      - body
+      - description
+      - picture

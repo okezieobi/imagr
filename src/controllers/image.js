@@ -8,8 +8,8 @@ export default class EntityController {
     this.handleServiceOutput = handleServiceOutput;
   }
 
-  createOne({ body: { title, body } }, res, next) {
-    this.service.create({ title, body, userId: res.locals.userId })
+  createOne({ body: { description }, file: { path } }, res, next) {
+    this.service.create({ description, source: path, userId: res.locals.userId })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 
