@@ -13,6 +13,10 @@ export default (Schema) => {
       required: true,
       ref: 'User',
     },
+    owner: {
+      type: Boolean,
+      default: true,
+    },
   }, { timestamps: true });
 
   return schema;

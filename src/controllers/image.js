@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-export default class EntityController {
+export default class ImageController {
   constructor({ image }, handleServiceOutput) {
     this.service = image;
     this.createOne = this.createOne.bind(this);

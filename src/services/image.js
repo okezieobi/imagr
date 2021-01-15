@@ -1,11 +1,11 @@
-export default class EntityServices {
+export default class ImageServices {
   constructor({ Image }) {
     this.model = Image;
   }
 
   async create({ description, source, userId }) {
-    const entity = await this.model.create({ description, source, userId });
-    return { entity, status: 201 };
+    const image = await this.model.create({ description, source, userId });
+    return { image, status: 201 };
   }
 
   async findByOwner({ userId }) {
@@ -15,9 +15,9 @@ export default class EntityServices {
 
   async findOneByOwner({ userId, _id }) {
     let data;
-    const entity = await this.model.findOne({ $and: [{ userId }, { _id }] }, '_id description userId source createdAt updatedAt');
-    if (entity) data = { entity, status: 200 };
-    else data = { message: 'Entity not found', status: 404 };
+    const image = await this.model.findOne({ $and: [{ userId }, { _id }] }, '_id description userId source createdAt updatedAt');
+    if (image) data = { image, status: 200 };
+    else data = { message: 'Inage not found', status: 404 };
     return data;
   }
 }
