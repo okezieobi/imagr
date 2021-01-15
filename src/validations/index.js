@@ -10,12 +10,17 @@ const handleValidationErr = (req, res, next) => {
   else next({ messages: errors.array(), status: 400 });
 };
 
+const handleFileUploadErr = ({ file }, res, next) => {
+  if (file) next();
+  else next({ message: 'File upload is required', status: 400 });
+};
+
 const userSchema = new UserSchema(checkSchema);
 const entitySchema = new EntitySchema(checkSchema);
 
 export default {
   user: {
-    signup: [fileUpload.image.single('avatar'), userSchema.validateSignup, handleValidationErr],
+    signup: [fileUpload.image.single('avatar'), handleFileUploadErr, userSchema.validateSignup, handleValidationErr],
     login: [userSchema.validateLogin, handleValidationErr],
     jwt: [userSchema.validateJWT, handleValidationErr],
   },

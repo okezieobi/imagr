@@ -4,6 +4,7 @@ export default (Schema) => {
   const schema = new Schema({
     avatar: {
       type: String,
+      required: true,
     },
     fullName: {
       type: String,

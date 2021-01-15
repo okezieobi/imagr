@@ -37,3 +37,4 @@ components:        # Schema definition for request body
       - email
       - username
       - password
+      - avatar
