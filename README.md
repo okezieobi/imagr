@@ -6,4 +6,4 @@
 
 ## Stack
 
-ExpressJS/NodeJS, MongoDB/Mongoose, Jest
+ExpressJS/NodeJS, MongoDB/Mongoose
