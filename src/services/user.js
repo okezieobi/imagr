@@ -14,7 +14,7 @@ export default class UserServices {
       await this.model.create(arg);
       const user = await this.model
         .findOne({ $and: [{ username: arg.username }, { email: arg.email }] },
-          '_id, fullName email username type createdAt').lean();
+          '_id fullName email username type createdAt avatar').lean();
       data = { user, status: 201 };
     }
     return data;

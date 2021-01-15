@@ -2,6 +2,7 @@ import { validationResult, checkSchema } from 'express-validator';
 
 import UserSchema from './user';
 import EntitySchema from './entity';
+import fileUpload from '../utils/fileUpload';
 
 const handleValidationErr = (req, res, next) => {
   const errors = validationResult(req);
@@ -14,7 +15,7 @@ const entitySchema = new EntitySchema(checkSchema);
 
 export default {
   user: {
-    signup: [userSchema.validateSignup, handleValidationErr],
+    signup: [fileUpload.image.single('avatar'), userSchema.validateSignup, handleValidationErr],
     login: [userSchema.validateLogin, handleValidationErr],
     jwt: [userSchema.validateJWT, handleValidationErr],
   },
