@@ -1,19 +1,21 @@
 export default (Schema) => {
   const schema = new Schema({
-    title: {
+    description: {
       type: String,
       required: true,
-      length: 512,
     },
-    body: {
+    source: {
       type: String,
       required: true,
-      length: 512,
     },
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'User',
+    },
+    owner: {
+      type: Boolean,
+      default: true,
     },
   }, { timestamps: true });
 

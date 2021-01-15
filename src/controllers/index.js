@@ -1,6 +1,6 @@
 import services from '../services';
 import UserController from './user';
-import EntityController from './entity';
+import ImageController from './image';
 import jwt from '../utils/jwt';
 
 const handleServiceOutput = (data, { locals }, next) => {
@@ -12,8 +12,8 @@ const handleServiceOutput = (data, { locals }, next) => {
   }
 };
 const user = new UserController(services, handleServiceOutput, jwt);
-const entity = new EntityController(services, handleServiceOutput);
+const image = new ImageController(services, handleServiceOutput);
 
 export default {
-  user, entity,
+  user, image,
 };

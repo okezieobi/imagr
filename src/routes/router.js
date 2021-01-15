@@ -1,5 +1,5 @@
 import userRoutes from './user';
-import entryRoutes from './entity';
+import imageRoutes from './image';
 import middleware from '../middleware';
 
 export default (Router) => {
@@ -11,7 +11,7 @@ export default (Router) => {
 
   router.use('/auth', userRoutes(Router, handleResponse, middleware));
   router.use(middleware.user.jwt);
-  router.use('/entities', entryRoutes(Router, handleResponse, middleware));
+  router.use('/images', imageRoutes(Router, handleResponse, middleware));
 
   return router;
 };
