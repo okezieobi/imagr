@@ -27,5 +27,6 @@ export default {
   image: {
     create: [fileUpload.image.single('picture'), handleFileUploadErr, imageSchema.validateInput, handleValidationErr],
     id: [imageSchema.validateEntryId, handleValidationErr],
+    search: [imageSchema.validateSearchInput, handleValidationErr],
   },
 };

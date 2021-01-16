@@ -1,14 +1,17 @@
 export default (Router, handleResponse,
   {
     image: {
-      createOne, getAll, verifyOne,
+      createOne, getAllByOwner, verifyOne, getAllByQuery, getAll,
     },
   }) => {
   const router = Router();
 
   router.route('/')
     .post(createOne, handleResponse)
-    .get(getAll, handleResponse);
+    .get(getAllByOwner, handleResponse);
+
+  router.get('/all', getAll, handleResponse);
+  router.get('/:search', getAllByQuery, handleResponse);
 
   router.use('/:id', verifyOne);
   router.route('/:id')
