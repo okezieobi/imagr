@@ -8,16 +8,27 @@ export default class ImageServices {
     return { image, status: 201 };
   }
 
+  async findByQuery({ search }) {
+    const query = new RegExp(search, 'i');
+    const images = await this.model.find({ description: query }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    return { images, status: 200 };
+  }
+
+  async findAll() {
+    const images = await this.model.find({}, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    return { images, status: 200 };
+  }
+
   async findByOwner({ userId }) {
-    const entities = await this.model.find({ userId }, '_id description source createdAt userId updatedAt', { limit: 10, sort: '-createdAt' });
-    return { entities, status: 200 };
+    const images = await this.model.find({ userId }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    return { images, status: 200 };
   }
 
   async findOneByOwner({ userId, _id }) {
     let data;
-    const image = await this.model.findOne({ $and: [{ userId }, { _id }] }, '_id description userId source createdAt updatedAt');
+    const image = await this.model.findOne({ $and: [{ userId }, { _id }] }, '_id description userId source createdAt updatedAt onSale owner');
     if (image) data = { image, status: 200 };
-    else data = { message: 'Inage not found', status: 404 };
+    else data = { message: 'Image not found', status: 404 };
     return data;
   }
 }

@@ -1,0 +1,20 @@
+paths:
+  /images/{search}:                # path of the user from your endpoint
+    get:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Image            # Value of the tag
+      summary: gets images that matches search parameter as an authorized user
+      security:
+       - cookieAuth: []
+      parameters:
+        - name: search
+          in: path
+          required: true
+          description: The description of image entries to be retrieved.
+          schema:
+            type: string
+      responses:          # server responses
+        200:
+          description: An object with a data property containing an array of image entries
+        401:
+          description: Error message object in error property of response body 

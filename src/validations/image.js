@@ -17,9 +17,19 @@ export default class EntitySchema {
       },
     });
 
+    this.validateSearchInput = checkSchema({
+      search: {
+        in: ['params'],
+        isLength: {
+          errorMessage: 'image description should be at least 1 character long',
+          options: { min: 1 },
+        },
+      },
+    });
+
     this.validateEntryId = checkSchema({
       id: {
-        in: ['query'],
+        in: ['params'],
         isMongoId: {
           errorMessage: 'Entity id does not match MongoId format',
         },

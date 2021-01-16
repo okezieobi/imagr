@@ -17,6 +17,10 @@ export default (Schema) => {
       type: Boolean,
       default: true,
     },
+    onSale: {
+      type: Boolean,
+      default: false,
+    },
   }, { timestamps: true });
 
   return schema;
