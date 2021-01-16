@@ -3,8 +3,12 @@ export default class ImageServices {
     this.model = Image;
   }
 
-  async create({ description, source, userId }) {
-    const image = await this.model.create({ description, source, userId });
+  async create({
+    description, source, userId, onSale,
+  }) {
+    const image = await this.model.create({
+      description, source, onSale, userId,
+    });
     return { image, status: 201 };
   }
 

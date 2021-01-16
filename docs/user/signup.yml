@@ -31,6 +31,7 @@ components:        # Schema definition for request body
             type: string
           email:
             type: string
+            format: email
           username:
             type: string
           password:

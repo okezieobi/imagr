@@ -10,8 +10,8 @@ export default class ImageController {
     this.handleServiceOutput = handleServiceOutput;
   }
 
-  createOne({ body: { description }, file: { path } }, res, next) {
-    this.service.create({ description, source: path, userId: res.locals.userId })
+  createOne({ body, file: { path } }, res, next) {
+    this.service.create({ , source: path, userId: res.locals.userId })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 
