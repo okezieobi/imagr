@@ -1,7 +1,7 @@
 export default (Router, handleResponse,
   {
     image: {
-      createOne, getAllByOwner, verifyOne, getAllByQuery, getAll, toggleOnSale,
+      createOne, getAllByOwner, verifyOne, getAllByQuery, getAll, toggleOnSale, buyOne,
     },
   }) => {
   const router = Router();
@@ -18,6 +18,7 @@ export default (Router, handleResponse,
     .get(handleResponse);
 
   router.put('/:id/sell', toggleOnSale, handleResponse);
+  router.post('/:id/buy', buyOne, handleResponse);
 
   return router;
 };

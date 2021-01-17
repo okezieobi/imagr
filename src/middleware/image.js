@@ -6,5 +6,6 @@ export default class ImageMiddleware {
     this.verifyOne = [...validations.image.id, controllers.image.findOneById];
     this.getAll = controllers.image.findAll;
     this.toggleOnSale = controllers.image.toggleOnSale;
+    this.buyOne = controllers.image.buyOne;
   }
 }

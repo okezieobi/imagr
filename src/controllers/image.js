@@ -8,6 +8,7 @@ export default class ImageController {
     this.findAllByQuery = this.findAllByQuery.bind(this);
     this.findAll = this.findAll.bind(this);
     this.toggleOnSale = this.toggleOnSale.bind(this);
+    this.buyOne = this.buyOne.bind(this);
     this.handleServiceOutput = handleServiceOutput;
   }
 
@@ -42,6 +43,11 @@ export default class ImageController {
       userId: res.locals.userId,
       onSale,
     })
+      .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
+  }
+
+  buyOne(req, res, next) {
+    this.service.buyImage({ imageData: res.locals.data.image, userId: res.locals.userId })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 }

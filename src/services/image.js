@@ -50,4 +50,22 @@ export default class ImageServices {
     } else data = { message: 'Image can only be put on sale by owner', status: 400 };
     return data;
   }
+
+  async buyImage({ imageData, userId }) {
+    let data;
+    const ownsImage = await this.model.findOne({ $and: [{ userId }, { _id: imageData._id }] }, '_id description userId source createdAt updatedAt onSale owner');
+    if (imageData.onSale) {
+      if (!ownsImage) {
+        const imageCopy = {
+          description: imageData.description,
+          source: imageData.source,
+          userId,
+          owner: false,
+        };
+        const image = await this.model.create(imageCopy);
+        data = { image, status: 201 };
+      } else data = { message: 'Already own image', status: 400 };
+    } else data = { message: 'Image is not on sale', status: 400 };
+    return data;
+  }
 }
