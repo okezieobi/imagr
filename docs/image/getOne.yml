@@ -3,7 +3,7 @@ paths:
     get:                 # endpoint request type (post request)
       tags:               # Tag property
         - Image            # Value of the tag
-      summary: gets a specific image entry as an authenticated user
+      summary: gets a specific image entry as an authorized user
       security:
        - cookieAuth: []
       parameters:
