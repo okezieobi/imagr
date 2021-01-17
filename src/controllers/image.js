@@ -15,8 +15,8 @@ export default class ImageController {
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 
-  findAllByQuery({ params }, res, next) {
-    this.service.findByQuery(params)
+  findAllByQuery({ query }, res, next) {
+    this.service.findByQuery(query)
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 

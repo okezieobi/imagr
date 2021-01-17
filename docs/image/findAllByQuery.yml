@@ -1,5 +1,5 @@
 paths:
-  /images/{search}:                # path of the user from your endpoint
+  /images/search:                # path of the user from your endpoint
     get:                 # endpoint request type (post request)
       tags:               # Tag property
         - Image            # Value of the tag
@@ -8,7 +8,7 @@ paths:
        - cookieAuth: []
       parameters:
         - name: search
-          in: path
+          in: query
           required: true
           description: The description of image entries to be retrieved.
           schema:
