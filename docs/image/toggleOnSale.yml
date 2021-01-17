@@ -1,0 +1,37 @@
+paths:
+  /images/{id}/sell:                # path of the user from your endpoint
+    put:                 # endpoint request type (post request)
+      tags:               # Tag property
+        - Image            # Value of the tag
+      summary: updates a specific image entry sale as an authenticated user
+      security:
+       - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of image entry to be updated.
+          schema:
+            type: MongoId
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ToggleSale'
+      responses:          # server responses
+        200:
+          description: An object with image entry details
+        400:
+          description: Error message array in error property of response body
+        401:
+          description: Error message object in error property of response body
+components:        # Schema definition for request body
+ schemas:
+  ToggleSale:
+    type: object
+    properties:
+          onSale:
+            type: boolean
+    required:
+      - onSale

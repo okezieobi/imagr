@@ -34,3 +34,4 @@ components:        # Schema definition for request body
     required:
       - description
       - picture
+      - onSale

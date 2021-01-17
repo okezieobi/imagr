@@ -12,7 +12,7 @@ paths:
           required: true
           description: The id of image entry to be retrieved.
           schema:
-            type: MongoId
+            type: string
       responses:          # server responses
         200:
           description: An object with image entry details
