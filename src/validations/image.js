@@ -19,7 +19,7 @@ export default class EntitySchema {
 
     this.validateSearchInput = checkSchema({
       search: {
-        in: ['params'],
+        in: ['query'],
         isLength: {
           errorMessage: 'image description should be at least 1 character long',
           options: { min: 1 },

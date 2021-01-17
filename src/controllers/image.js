@@ -7,16 +7,18 @@ export default class ImageController {
     this.findOneById = this.findOneById.bind(this);
     this.findAllByQuery = this.findAllByQuery.bind(this);
     this.findAll = this.findAll.bind(this);
+    this.toggleOnSale = this.toggleOnSale.bind(this);
+    this.buyOne = this.buyOne.bind(this);
     this.handleServiceOutput = handleServiceOutput;
   }
 
-  createOne({ body: { description }, file: { path } }, res, next) {
-    this.service.create({ description, source: path, userId: res.locals.userId })
+  createOne({ body, file: { path } }, res, next) {
+    this.service.create({ ...body, source: path, userId: res.locals.userId })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 
-  findAllByQuery({ params }, res, next) {
-    this.service.findByQuery(params)
+  findAllByQuery({ query }, res, next) {
+    this.service.findByQuery(query)
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 
@@ -31,7 +33,21 @@ export default class ImageController {
   }
 
   findOneById({ params: { id } }, res, next) {
-    this.service.findOneByOwner({ userId: res.locals.userId, _id: id })
+    this.service.getOne({ _id: id })
+      .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
+  }
+
+  toggleOnSale({ body: { onSale } }, res, next) {
+    this.service.toggleOnSale({
+      imageId: res.locals.data.image._id,
+      userId: res.locals.userId,
+      onSale,
+    })
+      .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
+  }
+
+  buyOne(req, res, next) {
+    this.service.buyImage({ imageData: res.locals.data.image, userId: res.locals.userId })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 }

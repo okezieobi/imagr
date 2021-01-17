@@ -26,9 +26,12 @@ components:        # Schema definition for request body
     properties:
           description:
             type: string
+          onSale:
+            type: boolean
           picture:
             type: string
             format: binary
     required:
       - description
       - picture
+      - onSale
