@@ -7,6 +7,7 @@ export default class ImageController {
     this.findOneById = this.findOneById.bind(this);
     this.findAllByQuery = this.findAllByQuery.bind(this);
     this.findAll = this.findAll.bind(this);
+    this.toggleOnSale = this.toggleOnSale.bind(this);
     this.handleServiceOutput = handleServiceOutput;
   }
 
@@ -31,7 +32,16 @@ export default class ImageController {
   }
 
   findOneById({ params: { id } }, res, next) {
-    this.service.findOneByOwner({ userId: res.locals.userId, _id: id })
+    this.service.getOne({ _id: id })
+      .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
+  }
+
+  toggleOnSale({ body: { onSale } }, res, next) {
+    this.service.toggleOnSale({
+      imageId: res.locals.data.image._id,
+      userId: res.locals.userId,
+      onSale,
+    })
       .then((data) => this.handleServiceOutput(data, res, next)).catch(next);
   }
 }

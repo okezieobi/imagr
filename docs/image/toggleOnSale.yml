@@ -12,11 +12,11 @@ paths:
           required: true
           description: The id of image entry to be updated.
           schema:
-            type: MongoId
+            type: string
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               $ref: '#/components/schemas/ToggleSale'
       responses:          # server responses
@@ -29,7 +29,6 @@ paths:
 components:        # Schema definition for request body
  schemas:
   ToggleSale:
-    type: object
     properties:
           onSale:
             type: boolean
