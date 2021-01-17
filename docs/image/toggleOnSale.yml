@@ -18,7 +18,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ToggleSale'
+              $ref: '#/components/schemas/ToggleOnSale'
       responses:          # server responses
         200:
           description: An object with image entry details
@@ -28,7 +28,7 @@ paths:
           description: Error message object in error property of response body
 components:        # Schema definition for request body
  schemas:
-  ToggleSale:
+  ToggleOnSale:
     properties:
           onSale:
             type: boolean
