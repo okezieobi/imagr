@@ -15,7 +15,7 @@ paths:
           description: User details object in data property of response body and a Json Web Token set in response cookie
           headers: 
             Set-Cookie:
-              description: A Json Web Token named token is set in cookie and is automatically included in subsequent requests
+              description: A Json Web Token is set in a cookie named token and is automatically included in subsequent requests
               schema:
                 type: string
         400:

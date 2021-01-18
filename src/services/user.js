@@ -9,7 +9,7 @@ export default class UserServices {
     let data;
     const userExists = await this.model
       .exists({ $or: [{ username: arg.username }, { email: arg.email }] });
-    if (userExists) data = { message: 'User already exists with either email or username, please sign in', status: 406 };
+    if (userExists) data = { message: 'User already exists with either email or username, please sign in or signup with another username and email', status: 406 };
     else {
       await this.model.create(arg);
       const user = await this.model
@@ -40,7 +40,7 @@ export default class UserServices {
     let data;
     const user = await this.model.findById(arg).lean();
     if (user) data = { user, status: 200 };
-    else data = { message: 'Unauthorized, please sign up by creating an account', status: 401 };
+    else data = { message: 'Unauthorized, please sign up by creating an account or log in if you already have an account', status: 401 };
     return data;
   }
 }
