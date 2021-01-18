@@ -15,23 +15,27 @@ export default class ImageServices {
 
   async findByQuery({ search }) {
     const query = new RegExp(search, 'i');
-    const images = await this.model.find({ description: query }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    const images = await this.model.find({ description: query }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' })
+      .populate('userId', 'fullName email username avatar').lean();
     return { images, status: 200 };
   }
 
   async findAll() {
-    const images = await this.model.find({}, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    const images = await this.model.find({}, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' })
+      .populate('userId', 'fullName email username avatar').lean();
     return { images, status: 200 };
   }
 
   async findByOwner({ userId }) {
-    const images = await this.model.find({ userId }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' });
+    const images = await this.model.find({ userId }, '_id description source createdAt userId updatedAt onSale owner', { limit: 10, sort: '-createdAt' })
+      .populate('userId', 'fullName email username avatar').lean();
     return { images, status: 200 };
   }
 
   async getOne({ _id }) {
     let data;
-    const image = await this.model.findOne({ _id }, '_id description userId source createdAt updatedAt onSale owner');
+    const image = await this.model.findOne({ _id }, '_id description userId source createdAt updatedAt onSale owner')
+      .populate('userId', 'fullName email username avatar');
     if (image) data = { image, status: 200 };
     else data = { message: 'Image not found', status: 404 };
     return data;
@@ -44,7 +48,8 @@ export default class ImageServices {
       if (ownsImage.onSale === onSale) data = { message: 'Image is already set as intended', status: 400 };
       else {
         await this.model.updateOne({ $and: [{ userId }, { _id: imageId }] }, { onSale });
-        const image = await this.model.findOne({ $and: [{ userId }, { _id: imageId }] }, '_id description userId source createdAt updatedAt onSale owner');
+        const image = await this.model.findOne({ $and: [{ userId }, { _id: imageId }] }, '_id description userId source createdAt updatedAt onSale owner')
+          .populate('userId', 'fullName email username avatar').lean();
         data = { image, status: 200 };
       }
     } else data = { message: 'Image can only be put on sale by owner', status: 400 };
