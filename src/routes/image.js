@@ -1,7 +1,7 @@
 export default (Router, handleResponse,
   {
     image: {
-      createOne, getAllByOwner, verifyOne, getAllByQuery, getAll, toggleOnSale, buyOne,
+      createOne, getAllByOwner, verifyOne, getAllByQuery, getAll, toggleOnSale, buyOne, deleteOne,
     },
   }) => {
   const router = Router();
@@ -15,7 +15,8 @@ export default (Router, handleResponse,
 
   router.use('/:id', verifyOne);
   router.route('/:id')
-    .get(handleResponse);
+    .get(handleResponse)
+    .delete(deleteOne, handleResponse);
 
   router.put('/:id/sell', toggleOnSale, handleResponse);
   router.post('/:id/buy', buyOne, handleResponse);
