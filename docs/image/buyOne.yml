@@ -3,7 +3,7 @@ paths:
     post:                 # endpoint request type (post request)
       tags:               # Tag property
         - Image            # Value of the tag
-      summary: buys a copy a specific image entry sale as an authenticated user
+      summary: buys a copy a specific image entry sale as an authorized user
       security:
        - cookieAuth: []
       parameters:

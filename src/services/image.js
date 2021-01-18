@@ -68,4 +68,14 @@ export default class ImageServices {
     } else data = { message: 'Image is not on sale', status: 400 };
     return data;
   }
+
+  async deleteOne({ imageId, userId }) {
+    let data;
+    const image = await this.model.findOne({ $and: [{ userId }, { _id: imageId }] }, '_id description userId source createdAt updatedAt onSale owner');
+    if (image) {
+      await this.model.deleteOne({ $and: [{ userId }, { _id: imageId }] });
+      data = { message: 'Image entry deleted', status: 204 };
+    } else data = { message: 'Image can only be deleted by owner', status: 400 };
+    return data;
+  }
 }

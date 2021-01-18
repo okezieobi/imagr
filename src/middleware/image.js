@@ -7,5 +7,6 @@ export default class ImageMiddleware {
     this.getAll = controllers.image.findAll;
     this.toggleOnSale = controllers.image.toggleOnSale;
     this.buyOne = controllers.image.buyOne;
+    this.deleteOne = controllers.image.deleteOne;
   }
 }
