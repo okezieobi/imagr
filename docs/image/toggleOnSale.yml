@@ -16,7 +16,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/ToggleOnSale'
       responses:          # server responses
@@ -29,6 +29,7 @@ paths:
 components:        # Schema definition for request body
  schemas:
   ToggleOnSale:
+    type: object
     properties:
           onSale:
             type: boolean
