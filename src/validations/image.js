@@ -1,4 +1,4 @@
-export default class EntitySchema {
+export default class ImageSchema {
   constructor(checkSchema) {
     this.validateInput = checkSchema({
       description: {
