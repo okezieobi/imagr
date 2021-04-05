@@ -22,11 +22,11 @@ const databaseSetup = async () => {
   await db.once('open', () => console.log('connected to database'));
 };
 
-if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'production') {
-  databaseSetup();
-} else {
+if (process.env.NODE_ENV === 'development') {
   databaseSetup();
   Object.values(models).forEach(async (modelProp) => { await modelProp.deleteMany(); });
+} else {
+  databaseSetup();
 }
 
 export default {
